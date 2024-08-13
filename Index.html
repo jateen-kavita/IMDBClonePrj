@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMDB Movie</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      href="https://fbi.cults3d.com/uploaders/20952150/illustration-file/3ff506ac-83d8-40ab-b474-3ebc2c727b7a/pngwing.com-2022-02-20T081900.534.png"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="nav-menu">
+        <div class="navbar">
+          <div class="leftSideLogo">
+            <h3>IMDB</h3>
+          </div>
+
+          <div class="navLinks">
+            <a href="#home" class="navitems">Home</a>
+            <a href="#Popular" class="navitems">Popular</a>
+            <a href="#OTT" class="navitems">OTT</a>
+            <a href="#favourateMovies" class="navitems">My Favourates</a>
+          </div>
+
+          <div class="searchBar">
+
+            <div class="inputSearch">
+              <input type="text" placeholder="Search Movies" class="searchBox" />
+            </div>
+
+            <div class="searchBtn border">
+              <button type="submit">Search</button>
+            </div>
+
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Carousel -->
+      <section class="carousel-wrapper" id="home">
+        <div class="carousel" id="carousel-1"></div>
+      </section>
+
+      <!-- latest Release -->
+      <section class="latest-release-wrapper movie-section">
+        <div class="latest-release text">
+          <h4>Latest Release</h4>
+        </div>
+        <div class="latest-release-container movie-container"></div>
+      </section>
+
+      <!-- OTT LInks section -->
+      <section class="logos" id="OTT">
+        <div class="logo-text text">
+          <h4>Watch your Favourate Movies on OTT</h4>
+        </div>
+        <div class="logo-container">
+          <div class="netflix">
+            <a href="https://www.netflix.com/in/ " target="_blank"
+              ><img
+                src="https://images.ctfassets.net/y2ske730sjqp/6bhPChRFLRxc17sR8jgKbe/6fa1c6e6f37acdc97ff635cf16ba6fb3/Logos-Readability-Netflix-logo.png"
+                alt="netflix img"
+            /></a>
+          </div>
+          <div class="prime">
+            <a
+              href="https://www.primevideo.com/offers/nonprimehomepage/ref=dv_web_force_root"
+              target="_blank"
+              ><img
+                src="https://download.logo.wine/logo/Amazon_Prime/Amazon_Prime-Logo.wine.png"
+                alt="prime img"
+            /></a>
+          </div>
+          <div class="disney">
+            <a href="https://www.hotstar.com/in/home?ref=%2Fin" target="_blank"
+              ><img
+                src="https://i.pinimg.com/originals/90/38/a4/9038a431f8f2064eff5abcf4f25d9870.png"
+                alt=""
+            /></a>
+          </div>
+          <div class="appletv">
+            <a href="https://tv.apple.com/in" target="_blank"
+              ><img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/99/AppleTV.png"
+                alt=""
+            /></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Most Popular Section -->
+      <section class="most-popular-wrapper movie-section" id="Popular">
+        <div class="most-popular text">
+          <h4>Most Popular</h4>
+        </div>
+        <div class="most-popular-container movie-container"></div>
+      </section>
+
+      <!-- Favourate Section -->
+      <section id="favourateMovies">
+       
+        <div class="favourate-wrapper">
+          <div class="favHeader">
+            <h2>Your Favourate Movies Collection</h2>
+          </div>
+          <div class="fav-container"></div>
+         
+        </div>
+      </section>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>
