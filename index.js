@@ -7,7 +7,7 @@ const Movies = async (movieName) => {
   return MovieAPI;
 };
 
-let movieArr = [
+let carouselArr = [
   "Premalu",
   "Godzilla x Kong: The New Empire",
   "Guntur Kaaram",
@@ -17,7 +17,25 @@ let movieArr = [
   "Kung Fu Panda 4",
   "Munjya",
   "Aavesham",
-  "crew"
+  "crew",
+];
+let movieArr = [
+  "Shaitaan",
+  "Phir Aayi Hasseen Dillruba",
+  "Stree 2",
+  "Deadpool Wolverine",
+  "12th Fail",
+  "Jailer",
+  ""
+];
+let webshowArr = [
+  "Panchayat", 
+  "Mirzapur", 
+  "Kota Factory",
+  "aashram",
+  "Scam 1992: The Harshad Mehta Story",
+  "Farzi",
+  "FRIENDS"
 ];
 
 let popularMovies = [
@@ -101,29 +119,27 @@ const film = async (movieName) => {
           
           `;
 
-         
-
       favouratewrapper.appendChild(favMovies);
     });
 
     // Assuming this code is inside the block where movies are rendered
-const trashcans = document.querySelectorAll('.trashcan');
+    const trashcans = document.querySelectorAll(".trashcan");
 
-// Attach event listeners to all trashcan icons
-trashcans.forEach((trashcan, index) => {
-  trashcan.addEventListener('click', () => {
-    // Remove the specific movie from the array using splice
-    FavourateMovies.splice(index, 1);
+    // Attach event listeners to all trashcan icons
+    trashcans.forEach((trashcan, index) => {
+      trashcan.addEventListener("click", () => {
+        // Remove the specific movie from the array using splice
+        FavourateMovies.splice(index, 1);
 
-    // Clear the container
-    const favouratewrapper = document.querySelector(".fav-container");
-    favouratewrapper.innerHTML = "";
+        // Clear the container
+        const favouratewrapper = document.querySelector(".fav-container");
+        favouratewrapper.innerHTML = "";
 
-    // Re-render the updated list of favorite movies
-    FavourateMovies.forEach((movie) => {
-      const favMovies = document.createElement("div");
-      favMovies.classList.add("fav-films");
-      favMovies.innerHTML = `
+        // Re-render the updated list of favorite movies
+        FavourateMovies.forEach((movie) => {
+          const favMovies = document.createElement("div");
+          favMovies.classList.add("fav-films");
+          favMovies.innerHTML = `
       <div class="favourateMovieContainer">
             <div class="image-container">
               <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
@@ -138,20 +154,19 @@ trashcans.forEach((trashcan, index) => {
               </div>
             </div>
           </div>`;
-      favouratewrapper.appendChild(favMovies);
+          favouratewrapper.appendChild(favMovies);
 
-      // Re-attach the trashcan event listeners after re-rendering
-      const newTrashcans = document.querySelectorAll('.trashcan');
-      newTrashcans.forEach((newTrashcan, newIndex) => {
-        newTrashcan.addEventListener('click', () => {
-          FavourateMovies.splice(newIndex, 1);
-          newTrashcan.closest('.fav-films').remove();  // Remove the movie element from the DOM
+          // Re-attach the trashcan event listeners after re-rendering
+          const newTrashcans = document.querySelectorAll(".trashcan");
+          newTrashcans.forEach((newTrashcan, newIndex) => {
+            newTrashcan.addEventListener("click", () => {
+              FavourateMovies.splice(newIndex, 1);
+              newTrashcan.closest(".fav-films").remove(); // Remove the movie element from the DOM
+            });
+          });
         });
       });
     });
-  });
-});
-
   });
 };
 
@@ -220,26 +235,25 @@ const popularFilms = async (movieName) => {
           </div>`;
 
       favouratewrapper.appendChild(favMovies);
-      
-    })
-   // Assuming this code is inside the block where movies are rendered
-const trashcans = document.querySelectorAll('.trashcan');
+    });
+    // Assuming this code is inside the block where movies are rendered
+    const trashcans = document.querySelectorAll(".trashcan");
 
-// Attach event listeners to all trashcan icons
-trashcans.forEach((trashcan, index) => {
-  trashcan.addEventListener('click', () => {
-    // Remove the specific movie from the array using splice
-    FavourateMovies.splice(index, 1);
+    // Attach event listeners to all trashcan icons
+    trashcans.forEach((trashcan, index) => {
+      trashcan.addEventListener("click", () => {
+        // Remove the specific movie from the array using splice
+        FavourateMovies.splice(index, 1);
 
-    // Clear the container
-    const favouratewrapper = document.querySelector(".fav-container");
-    favouratewrapper.innerHTML = "";
+        // Clear the container
+        const favouratewrapper = document.querySelector(".fav-container");
+        favouratewrapper.innerHTML = "";
 
-    // Re-render the updated list of favorite movies
-    FavourateMovies.forEach((movie) => {
-      const favMovies = document.createElement("div");
-      favMovies.classList.add("fav-films");
-      favMovies.innerHTML = `
+        // Re-render the updated list of favorite movies
+        FavourateMovies.forEach((movie) => {
+          const favMovies = document.createElement("div");
+          favMovies.classList.add("fav-films");
+          favMovies.innerHTML = `
       <div class="favourateMovieContainer">
             <div class="image-container">
               <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
@@ -254,21 +268,19 @@ trashcans.forEach((trashcan, index) => {
               </div>
             </div>
           </div>`;
-      favouratewrapper.appendChild(favMovies);
+          favouratewrapper.appendChild(favMovies);
 
-      // Re-attach the trashcan event listeners after re-rendering
-      const newTrashcans = document.querySelectorAll('.trashcan');
-      newTrashcans.forEach((newTrashcan, newIndex) => {
-        newTrashcan.addEventListener('click', () => {
-          FavourateMovies.splice(newIndex, 1);
-          newTrashcan.closest('.fav-films').remove();  // Remove the movie element from the DOM
+          // Re-attach the trashcan event listeners after re-rendering
+          const newTrashcans = document.querySelectorAll(".trashcan");
+          newTrashcans.forEach((newTrashcan, newIndex) => {
+            newTrashcan.addEventListener("click", () => {
+              FavourateMovies.splice(newIndex, 1);
+              newTrashcan.closest(".fav-films").remove(); // Remove the movie element from the DOM
+            });
+          });
         });
       });
     });
-  });
-});
-
-    
   });
 };
 
@@ -276,10 +288,7 @@ popularMovies.map((movie) => {
   return popularFilms(movie);
 });
 
-
-
 // Carousel Function
-
 
 const carousel = document.querySelector(".carousel");
 let currentMovieIndex = 0;
@@ -307,54 +316,53 @@ const carouselMovieShow = async (movieName) => {
     </div>
   `;
 
-  carousel.innerHTML = '';
+  carousel.innerHTML = "";
   carousel.appendChild(carouselElement);
 
   // Add event listeners for navigation buttons
-  const leftArrow = carouselElement.querySelector('.leftarrow');
-  const rightArrow = carouselElement.querySelector('.rightarrow');
+  const leftArrow = carouselElement.querySelector(".leftarrow");
+  const rightArrow = carouselElement.querySelector(".rightarrow");
 
-  leftArrow.addEventListener('click', showPreviousMovie);
-  rightArrow.addEventListener('click', showNextMovie);
+  leftArrow.addEventListener("click", showPreviousMovie);
+  rightArrow.addEventListener("click", showNextMovie);
 };
 
 // Function to show the next movie
 const showNextMovie = () => {
-  currentMovieIndex = (currentMovieIndex + 1) % movieArr.length;
-  carouselMovieShow(movieArr[currentMovieIndex]);
+  currentMovieIndex = (currentMovieIndex + 1) % carouselArr.length;
+  carouselMovieShow(carouselArr[currentMovieIndex]);
 };
 
 // Function to show the previous movie
 const showPreviousMovie = () => {
-  currentMovieIndex = (currentMovieIndex - 1 + movieArr.length) % movieArr.length;
-  carouselMovieShow(movieArr[currentMovieIndex]);
+  currentMovieIndex =
+    (currentMovieIndex - 1 + carouselArr.length) % carouselArr.length;
+  carouselMovieShow(carouselArr[currentMovieIndex]);
 };
 
 // Start the carousel with the first movie
-carouselMovieShow(movieArr[currentMovieIndex]);
+carouselMovieShow(carouselArr[currentMovieIndex]);
 
 // Automatically change the movie every 10 seconds
 const carouselInterval = setInterval(showNextMovie, 8000);
-
-
 
 // Function to handle the search
 
 const searchInput = document.querySelector(".searchBox");
 const searchButton = document.querySelector(".searchBtn button");
 
-
 const handleSearch = async () => {
   const movieName = searchInput.value.trim(); // Get the input value and trim whitespace
-  
-  if (movieName) { // Check if input is not empty
+
+  if (movieName) {
+    // Check if input is not empty
     try {
       // Fetch movie data and display in the carousel
       await carouselMovieShow(movieName);
     } catch (error) {
       console.error("Error fetching movie data:", error);
-    }finally{
-      searchInput.value=""
+    } finally {
+      searchInput.value = "";
     }
   } else {
     alert("Please enter a movie name.");
@@ -371,17 +379,133 @@ searchInput.addEventListener("keydown", (event) => {
   }
 });
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  const backToTopBtn = document.querySelector('.backtotopbtn');
+document.addEventListener("DOMContentLoaded", () => {
+  const backToTopBtn = document.querySelector(".backtotopbtn");
 
   const handleScroll = () => {
-    if (window.scrollY > 500) { // Show button when scrolled down more than 100px
-      backToTopBtn.style.opacity = '1';
+    if (window.scrollY > 500) {
+      // Show button when scrolled down more than 100px
+      backToTopBtn.style.opacity = "1";
     } else {
-      backToTopBtn.style.opacity = '0';
+      backToTopBtn.style.opacity = "0";
     }
   };
 
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener("scroll", handleScroll);
+});
+
+const webshowContainer = document.querySelector(".webshow-container");
+
+const webshow = async (movieName) => {
+  const movieData = await Movies(movieName);
+
+  const movieElement = document.createElement("div");
+  movieElement.classList.add("movie");
+  movieElement.innerHTML = `
+    <a href="https://www.imdb.com/" target="_blank">
+      <img src="${movieData.Poster}" alt="${movieData.Title}" title="${movieData.Title}">
+    </a>
+    <div class="fav-icon">
+      <i class="fa-solid fa-heart heartIcon"></i>
+    </div>
+  `;
+
+  webshowContainer.appendChild(movieElement);
+
+  const favIcon = movieElement.querySelector(".fav-icon");
+
+  movieElement.addEventListener("mouseenter", () => {
+    favIcon.style.color = "red";
+    favIcon.style.display = "block";
+  });
+
+  movieElement.addEventListener("mouseleave", () => {
+    favIcon.style.color = "transparent";
+  });
+
+  const favouratewrapper = document.querySelector(".fav-container");
+  favIcon.addEventListener("click", () => {
+    FavourateMovies.push({
+      title: movieData.Title,
+      poster: movieData.Poster,
+      plot: movieData.Plot,
+      genre: movieData.Genre,
+      imdb: movieData.imdbRating,
+    });
+
+    favouratewrapper.innerHTML = "";
+    FavourateMovies.forEach((movie) => {
+      const favMovies = document.createElement("div");
+      favMovies.classList.add("fav-films");
+      favMovies.innerHTML = `
+      <div class="favourateMovieContainer">
+            <div class="image-container">
+              <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
+            </div>
+            <div class="movieDetails">
+              <h4>${movie.title}</h4>
+              <p><span>Storyline:</span> ${movie.plot}</p>
+              <p><span>Movie Genre:&nbsp;</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings: </span> ${movie.imdb}</p>
+              <div class="watchtrash">
+              <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
+              <i class="fa-solid fa-trash-can trashcan"></i>
+              </div>
+              </div>
+          </div>
+          
+          `;
+
+      favouratewrapper.appendChild(favMovies);
+    });
+
+    // Assuming this code is inside the block where movies are rendered
+    const trashcans = document.querySelectorAll(".trashcan");
+
+    // Attach event listeners to all trashcan icons
+    trashcans.forEach((trashcan, index) => {
+      trashcan.addEventListener("click", () => {
+        // Remove the specific movie from the array using splice
+        FavourateMovies.splice(index, 1);
+
+        // Clear the container
+        const favouratewrapper = document.querySelector(".fav-container");
+        favouratewrapper.innerHTML = "";
+
+        // Re-render the updated list of favorite movies
+        FavourateMovies.forEach((movie) => {
+          const favMovies = document.createElement("div");
+          favMovies.classList.add("fav-films");
+          favMovies.innerHTML = `
+      <div class="favourateMovieContainer">
+            <div class="image-container">
+              <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
+            </div>
+            <div class="movieDetails">
+              <h4>${movie.title}</h4>
+              <p><span>Storyline:</span> ${movie.plot}</p>
+              <p><span>Movie Genre:</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings:</span> ${movie.imdb}</p>
+              <div class="watchtrash">
+                <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
+                <i class="fa-solid fa-trash-can trashcan"></i>
+              </div>
+            </div>
+          </div>`;
+          favouratewrapper.appendChild(favMovies);
+
+          // Re-attach the trashcan event listeners after re-rendering
+          const newTrashcans = document.querySelectorAll(".trashcan");
+          newTrashcans.forEach((newTrashcan, newIndex) => {
+            newTrashcan.addEventListener("click", () => {
+              FavourateMovies.splice(newIndex, 1);
+              newTrashcan.closest(".fav-films").remove(); // Remove the movie element from the DOM
+            });
+          });
+        });
+      });
+    });
+  });
+};
+
+const webshowDisplay = webshowArr.map((movie) => {
+  return webshow(movie);
 });
