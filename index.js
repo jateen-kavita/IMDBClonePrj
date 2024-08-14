@@ -21,7 +21,7 @@ let popularMovies = [
   "Salaar",
   "Kalki 2898 AD",
   "Brahmāstra: Part One – Shiva",
-  "Shaitaan",
+  "kabir Singh",
   "Rocky Aur Rani Kii Prem Kahaani",
   "Zindagi Na Milegi Dobara",
   "Tu Jhoothi Main Makkaar",
@@ -30,6 +30,8 @@ let popularMovies = [
   "Raanjhanaa",
   "Adipurush",
   "Saaho",
+  "Rockstar",
+  "animal",
 ];
 
 let FavourateMovies = [];
@@ -335,13 +337,15 @@ const searchButton = document.querySelector(".searchBtn button");
 
 const handleSearch = async () => {
   const movieName = searchInput.value.trim(); // Get the input value and trim whitespace
+  
   if (movieName) { // Check if input is not empty
     try {
       // Fetch movie data and display in the carousel
-      searchInput.innerHTML="";
       await carouselMovieShow(movieName);
     } catch (error) {
       console.error("Error fetching movie data:", error);
+    }finally{
+      searchInput.value=""
     }
   } else {
     alert("Please enter a movie name.");
@@ -356,4 +360,19 @@ searchInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     handleSearch();
   }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const backToTopBtn = document.querySelector('.backtotopbtn');
+
+  const handleScroll = () => {
+    if (window.scrollY > 100) { // Show button when scrolled down more than 100px
+      backToTopBtn.style.opacity = '1';
+    } else {
+      backToTopBtn.style.opacity = '0';
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
 });
