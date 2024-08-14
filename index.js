@@ -8,13 +8,16 @@ const Movies = async (movieName) => {
 };
 
 let movieArr = [
-  "Shaitaan",
+  "Premalu",
   "Godzilla x Kong: The New Empire",
   "Guntur Kaaram",
   "Teri Baaton Mein Aisa Uljha Jiya",
   "Fighter",
   "Bad Boys: Ride or Die",
   "Kung Fu Panda 4",
+  "Munjya",
+  "Aavesham",
+  "crew"
 ];
 
 let popularMovies = [
