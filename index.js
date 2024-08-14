@@ -275,12 +275,13 @@ popularMovies.map((movie) => {
 
 
 
-// Search Function
+// Carousel Function
 
 
 const carousel = document.querySelector(".carousel");
 let currentMovieIndex = 0;
 
+// Function to fetch movie data and update the carousel
 const carouselMovieShow = async (movieName) => {
   const carouselData = await Movies(movieName);
   const carouselElement = document.createElement("div");
@@ -303,7 +304,6 @@ const carouselMovieShow = async (movieName) => {
     </div>
   `;
 
-
   carousel.innerHTML = '';
   carousel.appendChild(carouselElement);
 
@@ -315,25 +315,31 @@ const carouselMovieShow = async (movieName) => {
   rightArrow.addEventListener('click', showNextMovie);
 };
 
+// Function to show the next movie
 const showNextMovie = () => {
   currentMovieIndex = (currentMovieIndex + 1) % movieArr.length;
   carouselMovieShow(movieArr[currentMovieIndex]);
 };
 
+// Function to show the previous movie
 const showPreviousMovie = () => {
   currentMovieIndex = (currentMovieIndex - 1 + movieArr.length) % movieArr.length;
   carouselMovieShow(movieArr[currentMovieIndex]);
 };
 
+// Start the carousel with the first movie
+carouselMovieShow(movieArr[currentMovieIndex]);
 
-carouselMovieShow(movieArr[currentMovieIndex])
+// Automatically change the movie every 10 seconds
+const carouselInterval = setInterval(showNextMovie, 8000);
 
 
+
+// Function to handle the search
 
 const searchInput = document.querySelector(".searchBox");
 const searchButton = document.querySelector(".searchBtn button");
 
-// Function to handle the search
 
 const handleSearch = async () => {
   const movieName = searchInput.value.trim(); // Get the input value and trim whitespace
@@ -367,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopBtn = document.querySelector('.backtotopbtn');
 
   const handleScroll = () => {
-    if (window.scrollY > 100) { // Show button when scrolled down more than 100px
+    if (window.scrollY > 500) { // Show button when scrolled down more than 100px
       backToTopBtn.style.opacity = '1';
     } else {
       backToTopBtn.style.opacity = '0';
