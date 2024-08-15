@@ -26,16 +26,16 @@ let movieArr = [
   "Deadpool Wolverine",
   "12th Fail",
   "Jailer",
-  ""
+  "joker",
 ];
 let webshowArr = [
-  "Panchayat", 
-  "Mirzapur", 
+  "Panchayat",
+  "Mirzapur",
   "Kota Factory",
   "aashram",
   "Scam 1992: The Harshad Mehta Story",
   "Farzi",
-  "FRIENDS"
+  "FRIENDS",
 ];
 
 let popularMovies = [
@@ -394,6 +394,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", handleScroll);
 });
 
+// Webshow section
+
 const webshowContainer = document.querySelector(".webshow-container");
 
 const webshow = async (movieName) => {
@@ -509,3 +511,35 @@ const webshow = async (movieName) => {
 const webshowDisplay = webshowArr.map((movie) => {
   return webshow(movie);
 });
+
+const body = document.body;
+
+
+const moviebg = async (moviename) => {
+  try {
+    const moviebgURL = await Movies(moviename);
+
+    if (moviebgURL && moviebgURL.Poster) {
+      body.style.backgroundImage = `url(${moviebgURL.Poster})`;
+      body.style.backgroundRepeat = "repeat-y";
+      body.style.backgroundSize = "contain";
+    } else {
+      console.warn('No valid poster URL found for', moviename);
+    }
+  } catch (error) {
+    console.error('Error fetching the movie background:', error);
+  }
+};
+
+// Function to select a random movie from the array
+const getRandomMovie = (moviesArray) => {
+  const randomIndex = Math.floor(Math.random() * moviesArray.length);
+  return moviesArray[randomIndex];
+};
+
+
+setInterval(() => {
+  const randomMovie = getRandomMovie(popularMovies);
+  moviebg(randomMovie); // Set the background image for the random movie
+}, 2000); // Change image every 2 seconds (adjust as needed)
+

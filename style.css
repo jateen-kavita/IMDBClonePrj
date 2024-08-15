@@ -30,24 +30,22 @@ html {
 a {
   text-decoration: none;
 }
-body {
-  background: url(https://t4.ftcdn.net/jpg/02/39/24/45/240_F_239244529_DvA47OXFQic9krRTFm49g9RUDPRTSIJV.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+.glassmorphism-effect {
+  /* From https://css.glass */
+  background: rgba(164, 164, 164, 0.31);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.7px);
+  -webkit-backdrop-filter: blur(8.7px);
+  border: 1px solid rgba(164, 164, 164, 0.5);
 }
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 4.25rem;
   /* From https://css.glass */
-  background: rgba(164, 164, 164, 0.31);
   border-radius: 0px 0px 50px 50px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8.7px);
-  -webkit-backdrop-filter: blur(8.7px);
-  border: 1px solid rgba(164, 164, 164, 0.5);
 }
 
 .leftSideLogo {
@@ -197,13 +195,6 @@ body {
   height: 100%;
   width: 100%;
   border-radius: 1.5rem;
-  /* From https://css.glass */
-  background: rgba(164, 164, 164, 0.31);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8.7px);
-  -webkit-backdrop-filter: blur(8.7px);
-  border: 1px solid rgba(164, 164, 164, 0.5);
   transition: all 1s ease-in-out;
 }
 
@@ -213,7 +204,6 @@ body {
   height: 100%;
   overflow: hidden;
   object-fit: contain;
-
 }
 
 .carousel-wrapper .carousel .img-container img {
@@ -316,13 +306,6 @@ body {
   width: auto;
   scrollbar-color: transparent transparent;
   scrollbar-width: thin;
-  /* From https://css.glass */
-  background: rgba(164, 164, 164, 0.31);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8.7px);
-  -webkit-backdrop-filter: blur(8.7px);
-  border: 1px solid rgba(164, 164, 164, 0.5);
 }
 
 .movie-container {
@@ -410,22 +393,28 @@ body {
 .logo-container {
   margin-top: 2rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  background-color: var(--color);
   border-radius: 1.5rem;
   height: 5rem;
-  /* From https://css.glass */
-  background: rgba(164, 164, 164, 0.31);
-  border-radius: 60px 10px 60px 10px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(8.7px);
-  border: 1px solid rgba(164, 164, 164, 0.5);
+  padding: 0rem 6rem;
 }
+.ottlogo {
+  transition: all 1s;
+  &:hover {
+    transform: scale(1.2);
+    color: var(--color);
+  }
+}
+
 .netflix {
   width: 10rem;
   height: 5rem;
+  transition: all 1s ease-in-out;
+  &:hover {
+    filter: drop-shadow(red 5px 5px 50px);
+  }
+  
 }
 .netflix img {
   background-size: cover;
@@ -433,10 +422,17 @@ body {
   background-position: center;
   height: 100%;
   width: 100%;
+  
 }
+
 .prime {
   width: 6rem;
   height: 4rem;
+  transition: all 1s ease-in-out;
+  &:hover {
+    filter: drop-shadow(blue  5px 5px 50px);
+    opacity: 1;
+  }
 }
 .prime img {
   background-size: cover;
@@ -446,8 +442,13 @@ body {
   width: 100%;
 }
 .disney {
-  width: 7rem;
+  width: 9rem;
   height: 3.2rem;
+  transition: all 1s ease-in-out;
+  &:hover {
+    filter: drop-shadow(blue  5px 5px 50px);
+    opacity: 1;
+  }
 }
 .disney img {
   background-size: cover;
@@ -460,6 +461,11 @@ body {
 .appletv {
   width: 4.5rem;
   height: 2.5rem;
+  transition: all 1s ease-in-out;
+  &:hover {
+    filter: drop-shadow(rgb(157, 157, 157)  5px 5px 50px);
+    opacity: 1;
+  }
 }
 .appletv img {
   background-size: cover;
@@ -484,13 +490,13 @@ body {
   align-items: center;
   gap: 1.5rem;
   border-radius: 2rem;
-  margin-top: 1rem;
+  margin: 1rem 2rem;
   height: 18rem;
   transition: all 1s ease-in-out;
   /* From https://css.glass */
   background: rgba(164, 164, 164, 0.31);
   border-radius: 0px 50px 0px 50px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(164, 164, 164, 0.5);
@@ -501,11 +507,11 @@ body {
   height: 15rem;
   width: 13%;
   border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   cursor: pointer;
 }
 .favourateMovieContainer img {
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -541,6 +547,8 @@ body {
   letter-spacing: 0.5px;
   line-height: 2.1rem;
 }
+
+/* trashicon */
 
 .watchtrash {
   display: flex;
