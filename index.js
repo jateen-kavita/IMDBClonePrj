@@ -55,7 +55,6 @@ let popularMovies = [
   "animal",
 ];
 
-
 // Latest Movies function
 const movieContainer = document.querySelector(".latest-release-container");
 let FavourateMovies = []; // Initialize as an empty array
@@ -71,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const film = async (movieName) => {
   const movieData = await Movies(movieName);
+
   const movieElement = document.createElement("div");
   movieElement.classList.add("movie");
   movieElement.innerHTML = `
@@ -109,7 +109,7 @@ const film = async (movieName) => {
     // Save to localStorage
     localStorage.setItem("favouriteMovies", JSON.stringify(FavourateMovies));
 
-    // Re-render the favorite movies list after adding the new movie
+    // Immediately re-render the favorite movies list after adding the new movie
     renderFavoriteMovies();
   });
 };
@@ -152,6 +152,14 @@ function renderFavoriteMovies() {
     });
   });
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const storedMovies = localStorage.getItem("favouriteMovies");
+
+  if (storedMovies) {
+    FavourateMoviesArr = JSON.parse(storedMovies);
+    renderFavoriteMovies();
+  }
+});
 
 // This function can be used to populate the movies on load
 const movieDisplay = movieArr.map((movie) => {
@@ -211,7 +219,10 @@ const popularFilms = async (movieName) => {
     PopularFavourateMovies.push(newFavoriteMovie);
 
     // Save to localStorage
-    localStorage.setItem("favouriteMovies", JSON.stringify(PopularFavourateMovies));
+    localStorage.setItem(
+      "favouriteMovies",
+      JSON.stringify(PopularFavourateMovies)
+    );
 
     renderFavoriteMovies(); // Render the updated list after adding the new movie
   });
@@ -248,7 +259,10 @@ function renderFavoriteMovies() {
       PopularFavourateMovies.splice(index, 1);
 
       // Update localStorage
-      localStorage.setItem("favouriteMovies", JSON.stringify(PopularFavourateMovies));
+      localStorage.setItem(
+        "favouriteMovies",
+        JSON.stringify(PopularFavourateMovies)
+      );
 
       // Re-render the favorite movies list
       renderFavoriteMovies();
@@ -260,7 +274,6 @@ function renderFavoriteMovies() {
 popularMovies.map((movie) => {
   return popularFilms(movie);
 });
-
 
 // Carousel Function
 
@@ -378,6 +391,14 @@ searchFunction();
 const webshowContainer = document.querySelector(".webshow-container");
 let FavourateMoviesArr = []; // Initialize as an empty array
 
+document.addEventListener("DOMContentLoaded", () => {
+  const storedMovies = localStorage.getItem("favouriteMovies");
+
+  if (storedMovies) {
+    FavourateMoviesArr = JSON.parse(storedMovies);
+    renderFavoriteMovies();
+  }
+});
 const webshow = async (movieName) => {
   const movieData = await Movies(movieName);
 
@@ -454,7 +475,10 @@ function renderFavoriteMovies() {
       FavourateMoviesArr.splice(index, 1);
 
       // Update localStorage
-      localStorage.setItem("favouriteMovies", JSON.stringify(FavourateMoviesArr));
+      localStorage.setItem(
+        "favouriteMovies",
+        JSON.stringify(FavourateMoviesArr)
+      );
 
       // Re-render the favorite movies list
       renderFavoriteMovies();
@@ -463,17 +487,8 @@ function renderFavoriteMovies() {
 }
 
 // Load favorite movies from localStorage on page load
-document.addEventListener("DOMContentLoaded", () => {
-  const storedMovies = localStorage.getItem("favouriteMovies");
 
-  if (storedMovies) {
-    FavourateMoviesArr = JSON.parse(storedMovies);
-    renderFavoriteMovies();
-  }
-});
 
 const webshowDisplay = webshowArr.map((movie) => {
   return webshow(movie);
 });
-
-
