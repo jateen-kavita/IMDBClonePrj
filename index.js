@@ -174,6 +174,10 @@ const movieDisplay = movieArr.map((movie) => {
   return film(movie);
 });
 
+
+
+
+
 // Most Popular Section
 
 const popularSection = document.querySelector(".most-popular-container");
@@ -197,6 +201,7 @@ const popularFilms = async (movieName) => {
   movieContainer.addEventListener("mouseenter", () => {
     favIcon.style.color = "red";
     favIcon.style.display = "block";
+    
   });
 
   movieContainer.addEventListener("mouseleave", () => {
@@ -234,8 +239,13 @@ const popularFilms = async (movieName) => {
               </div>
           </div>`;
 
+         
+
       favouratewrapper.appendChild(favMovies);
     });
+
+
+
     // Assuming this code is inside the block where movies are rendered
     const trashcans = document.querySelectorAll(".trashcan");
 
@@ -287,6 +297,8 @@ const popularFilms = async (movieName) => {
 popularMovies.map((movie) => {
   return popularFilms(movie);
 });
+
+
 
 // Carousel Function
 
@@ -523,6 +535,7 @@ const moviebg = async (moviename) => {
       body.style.backgroundImage = `url(${moviebgURL.Poster})`;
       body.style.backgroundRepeat = "repeat-y";
       body.style.backgroundSize = "contain";
+      body.style.backgroundPosition= "center"
     } else {
       console.warn('No valid poster URL found for', moviename);
     }
@@ -540,6 +553,5 @@ const getRandomMovie = (moviesArray) => {
 
 setInterval(() => {
   const randomMovie = getRandomMovie(popularMovies);
-  moviebg(randomMovie); // Set the background image for the random movie
-}, 2000); // Change image every 2 seconds (adjust as needed)
-
+  moviebg(randomMovie); 
+}, 8000); 
