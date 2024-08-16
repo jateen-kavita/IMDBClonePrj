@@ -55,14 +55,22 @@ let popularMovies = [
   "animal",
 ];
 
-let FavourateMovies = [];
 
 // Latest Movies function
 const movieContainer = document.querySelector(".latest-release-container");
+let FavourateMovies = []; // Initialize as an empty array
+
+// Load favorite movies from localStorage on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const storedMovies = localStorage.getItem("favouriteMovies");
+  if (storedMovies) {
+    FavourateMovies = JSON.parse(storedMovies); // Populate the array with stored data
+    renderFavoriteMovies(); // Render the favorite movies on page load
+  }
+});
 
 const film = async (movieName) => {
   const movieData = await Movies(movieName);
-
   const movieElement = document.createElement("div");
   movieElement.classList.add("movie");
   movieElement.innerHTML = `
@@ -87,100 +95,84 @@ const film = async (movieName) => {
     favIcon.style.color = "transparent";
   });
 
-  const favouratewrapper = document.querySelector(".fav-container");
   favIcon.addEventListener("click", () => {
-    FavourateMovies.push({
+    const newFavoriteMovie = {
       title: movieData.Title,
       poster: movieData.Poster,
       plot: movieData.Plot,
       genre: movieData.Genre,
       imdb: movieData.imdbRating,
-    });
+    };
 
-    favouratewrapper.innerHTML = "";
-    FavourateMovies.forEach((movie) => {
-      const favMovies = document.createElement("div");
-      favMovies.classList.add("fav-films");
-      favMovies.innerHTML = `
-      <div class="favourateMovieContainer">
-            <div class="image-container">
-              <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
-            </div>
-            <div class="movieDetails">
-              <h4>${movie.title}</h4>
-              <p><span>Storyline:</span> ${movie.plot}</p>
-              <p><span>Movie Genre:&nbsp;</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings: </span> ${movie.imdb}</p>
-              <div class="watchtrash">
-              <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
-              <i class="fa-solid fa-trash-can trashcan"></i>
-              </div>
-              </div>
-          </div>
-          
-          `;
+    FavourateMovies.push(newFavoriteMovie);
 
-      favouratewrapper.appendChild(favMovies);
-    });
+    // Save to localStorage
+    localStorage.setItem("favouriteMovies", JSON.stringify(FavourateMovies));
 
-    // Assuming this code is inside the block where movies are rendered
-    const trashcans = document.querySelectorAll(".trashcan");
-
-    // Attach event listeners to all trashcan icons
-    trashcans.forEach((trashcan, index) => {
-      trashcan.addEventListener("click", () => {
-        // Remove the specific movie from the array using splice
-        FavourateMovies.splice(index, 1);
-
-        // Clear the container
-        const favouratewrapper = document.querySelector(".fav-container");
-        favouratewrapper.innerHTML = "";
-
-        // Re-render the updated list of favorite movies
-        FavourateMovies.forEach((movie) => {
-          const favMovies = document.createElement("div");
-          favMovies.classList.add("fav-films");
-          favMovies.innerHTML = `
-      <div class="favourateMovieContainer">
-            <div class="image-container">
-              <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
-            </div>
-            <div class="movieDetails">
-              <h4>${movie.title}</h4>
-              <p><span>Storyline:</span> ${movie.plot}</p>
-              <p><span>Movie Genre:</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings:</span> ${movie.imdb}</p>
-              <div class="watchtrash">
-                <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
-                <i class="fa-solid fa-trash-can trashcan"></i>
-              </div>
-            </div>
-          </div>`;
-          favouratewrapper.appendChild(favMovies);
-
-          // Re-attach the trashcan event listeners after re-rendering
-          const newTrashcans = document.querySelectorAll(".trashcan");
-          newTrashcans.forEach((newTrashcan, newIndex) => {
-            newTrashcan.addEventListener("click", () => {
-              FavourateMovies.splice(newIndex, 1);
-              newTrashcan.closest(".fav-films").remove(); // Remove the movie element from the DOM
-            });
-          });
-        });
-      });
-    });
+    // Re-render the favorite movies list after adding the new movie
+    renderFavoriteMovies();
   });
 };
 
+function renderFavoriteMovies() {
+  const favouratewrapper = document.querySelector(".fav-container");
+  favouratewrapper.innerHTML = ""; // Clear the container
+
+  FavourateMovies.forEach((movie, index) => {
+    const favMovies = document.createElement("div");
+    favMovies.classList.add("fav-films");
+    favMovies.innerHTML = `
+      <div class="favourateMovieContainer">
+        <div class="image-container">
+          <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
+        </div>
+        <div class="movieDetails">
+          <h4>${movie.title}</h4>
+          <p><span>Storyline:</span> ${movie.plot}</p>
+          <p><span>Movie Genre:&nbsp;</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings: </span> ${movie.imdb}</p>
+          <div class="watchtrash">
+            <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
+            <i class="fa-solid fa-trash-can trashcan"></i>
+          </div>
+        </div>
+      </div>`;
+    favouratewrapper.appendChild(favMovies);
+
+    // Attach event listener to remove movie from favorites
+    const trashcan = favMovies.querySelector(".trashcan");
+    trashcan.addEventListener("click", () => {
+      // Remove the movie from the array
+      FavourateMovies.splice(index, 1);
+
+      // Update localStorage
+      localStorage.setItem("favouriteMovies", JSON.stringify(FavourateMovies));
+
+      // Re-render the favorite movies list
+      renderFavoriteMovies();
+    });
+  });
+}
+
+// This function can be used to populate the movies on load
 const movieDisplay = movieArr.map((movie) => {
   return film(movie);
 });
 
 
-
-
-
 // Most Popular Section
 
 const popularSection = document.querySelector(".most-popular-container");
+let PopularFavourateMovies = []; // Initialize as an empty array
+
+// Load favorite movies from localStorage on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const storedMovies = localStorage.getItem("favouriteMovies");
+
+  if (storedMovies) {
+    PopularFavourateMovies = JSON.parse(storedMovies); // Populate the array with stored data
+    renderFavoriteMovies(); // Render the favorite movies on page load
+  }
+});
 
 const popularFilms = async (movieName) => {
   const movieData = await Movies(movieName);
@@ -193,111 +185,81 @@ const popularFilms = async (movieName) => {
     </a>
       <div class="fav-icon" >
       <i class="fa-solid fa-heart heartIcon" ></i>
-    </div>
-    `;
+    </div>`;
   popularSection.appendChild(movieContainer);
 
   const favIcon = movieContainer.querySelector(".fav-icon");
+
   movieContainer.addEventListener("mouseenter", () => {
     favIcon.style.color = "red";
     favIcon.style.display = "block";
-    
   });
 
   movieContainer.addEventListener("mouseleave", () => {
-    const favIcon = movieContainer.querySelector(".fav-icon");
     favIcon.style.color = "transparent";
   });
 
-  const favouratewrapper = document.querySelector(".fav-container");
   movieContainer.addEventListener("click", () => {
-    FavourateMovies.push({
+    const newFavoriteMovie = {
       title: movieData.Title,
       poster: movieData.Poster,
       plot: movieData.Plot,
       genre: movieData.Genre,
       imdb: movieData.imdbRating,
-    });
+    };
 
-    favouratewrapper.innerHTML = "";
-    FavourateMovies.forEach((movie) => {
-      const favMovies = document.createElement("div");
-      favMovies.classList.add("fav-films");
-      favMovies.innerHTML = `
-      <div class="favourateMovieContainer">
-            <div class="image-container">
-              <img src="${movie.poster}" alt="${movie.title}"  title="${movie.title}"/>
-            </div>
-            <div class="movieDetails">
-              <h4>${movie.title}</h4>
-              <p><span>Storyline:</span> ${movie.plot}</p>
-              <p><span>Movie Genre:</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings:</span> ${movie.imdb}</p>
-              <div class="watchtrash">
-              <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
-              <i class="fa-solid fa-trash-can trashcan"></i>
-              </div>
-              </div>
-          </div>`;
+    PopularFavourateMovies.push(newFavoriteMovie);
 
-         
+    // Save to localStorage
+    localStorage.setItem("favouriteMovies", JSON.stringify(PopularFavourateMovies));
 
-      favouratewrapper.appendChild(favMovies);
-    });
-
-
-
-    // Assuming this code is inside the block where movies are rendered
-    const trashcans = document.querySelectorAll(".trashcan");
-
-    // Attach event listeners to all trashcan icons
-    trashcans.forEach((trashcan, index) => {
-      trashcan.addEventListener("click", () => {
-        // Remove the specific movie from the array using splice
-        FavourateMovies.splice(index, 1);
-
-        // Clear the container
-        const favouratewrapper = document.querySelector(".fav-container");
-        favouratewrapper.innerHTML = "";
-
-        // Re-render the updated list of favorite movies
-        FavourateMovies.forEach((movie) => {
-          const favMovies = document.createElement("div");
-          favMovies.classList.add("fav-films");
-          favMovies.innerHTML = `
-      <div class="favourateMovieContainer">
-            <div class="image-container">
-              <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
-            </div>
-            <div class="movieDetails">
-              <h4>${movie.title}</h4>
-              <p><span>Storyline:</span> ${movie.plot}</p>
-              <p><span>Movie Genre:</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings:</span> ${movie.imdb}</p>
-              <div class="watchtrash">
-                <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
-                <i class="fa-solid fa-trash-can trashcan"></i>
-              </div>
-            </div>
-          </div>`;
-          favouratewrapper.appendChild(favMovies);
-
-          // Re-attach the trashcan event listeners after re-rendering
-          const newTrashcans = document.querySelectorAll(".trashcan");
-          newTrashcans.forEach((newTrashcan, newIndex) => {
-            newTrashcan.addEventListener("click", () => {
-              FavourateMovies.splice(newIndex, 1);
-              newTrashcan.closest(".fav-films").remove(); // Remove the movie element from the DOM
-            });
-          });
-        });
-      });
-    });
+    renderFavoriteMovies(); // Render the updated list after adding the new movie
   });
 };
 
+function renderFavoriteMovies() {
+  const favouratewrapper = document.querySelector(".fav-container");
+  favouratewrapper.innerHTML = "";
+
+  PopularFavourateMovies.forEach((movie, index) => {
+    const favMovies = document.createElement("div");
+    favMovies.classList.add("fav-films");
+    favMovies.innerHTML = `
+      <div class="favourateMovieContainer">
+        <div class="image-container">
+          <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
+        </div>
+        <div class="movieDetails">
+          <h4>${movie.title}</h4>
+          <p><span>Storyline:</span> ${movie.plot}</p>
+          <p><span>Movie Genre:</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings:</span> ${movie.imdb}</p>
+          <div class="watchtrash">
+            <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
+            <i class="fa-solid fa-trash-can trashcan"></i>
+          </div>
+        </div>
+      </div>`;
+    favouratewrapper.appendChild(favMovies);
+
+    // Attach event listener to remove movie from favorites
+    const trashcan = favMovies.querySelector(".trashcan");
+    trashcan.addEventListener("click", () => {
+      // Remove the movie from the array
+      PopularFavourateMovies.splice(index, 1);
+
+      // Update localStorage
+      localStorage.setItem("favouriteMovies", JSON.stringify(PopularFavourateMovies));
+
+      // Re-render the favorite movies list
+      renderFavoriteMovies();
+    });
+  });
+}
+
+// This function can be used to populate the popular films
 popularMovies.map((movie) => {
   return popularFilms(movie);
 });
-
 
 
 // Carousel Function
@@ -360,55 +322,61 @@ const carouselInterval = setInterval(showNextMovie, 8000);
 
 // Function to handle the search
 
-const searchInput = document.querySelector(".searchBox");
-const searchButton = document.querySelector(".searchBtn button");
+// Search Funtion
 
-const handleSearch = async () => {
-  const movieName = searchInput.value.trim(); // Get the input value and trim whitespace
+const searchInputBar = document.querySelector(".searchBox");
+const searchOutput = document.querySelector(".searchResults");
+const SearchBtn = document.getElementById("searchBtn");
 
-  if (movieName) {
-    // Check if input is not empty
-    try {
-      // Fetch movie data and display in the carousel
-      await carouselMovieShow(movieName);
-    } catch (error) {
-      console.error("Error fetching movie data:", error);
-    } finally {
-      searchInput.value = "";
+// Search Function
+const searchFunction = () => {
+  searchInputBar.addEventListener("input", async () => {
+    const searchInput = searchInputBar.value;
+    const searchMovies = await Movies(searchInput);
+
+    const searchedResults = document.createElement("div");
+    searchOutput.innerHTML = "";
+
+    if (searchInput != "") {
+      searchedResults.innerHTML = "";
+      searchedResults.classList.add("inputedsearchResults");
+      searchedResults.innerHTML = `
+      <div class="searchImg">
+        <a href="Demo/result.html" class="movieLink" data-movie="${searchMovies.Title}">
+          <img src="${searchMovies.Poster}" alt="${searchMovies.Title}">
+        </a>
+        </div>
+        <div class="movie-Details">
+          <ul>
+            <li><a href="Demo/result.html" class="movieLink" data-movie="${searchMovies.Title}">Title: ${searchMovies.Title}</a></li>
+            <li>Genre: ${searchMovies.Genre}</li>
+            <li>Cast: ${searchMovies.Actors}</li>
+            <li>Year: ${searchMovies.Year}</li>
+          </ul>
+
+        </div>
+      `;
+
+      // Add click event listener to save the movie title
+      searchedResults.querySelectorAll(".movieLink").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const movieTitle = e.currentTarget.getAttribute("data-movie");
+          localStorage.setItem("selectedMovie", movieTitle); // Store the movie title
+        });
+      });
+    } else {
+      console.log("Not found");
     }
-  } else {
-    alert("Please enter a movie name.");
-  }
+    searchOutput.appendChild(searchedResults);
+  });
 };
 
-// Event listener for the search button
-searchButton.addEventListener("click", handleSearch);
-
-// Optionally, allow search on pressing 'Enter' key
-searchInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    handleSearch();
-  }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const backToTopBtn = document.querySelector(".backtotopbtn");
-
-  const handleScroll = () => {
-    if (window.scrollY > 500) {
-      // Show button when scrolled down more than 100px
-      backToTopBtn.style.opacity = "1";
-    } else {
-      backToTopBtn.style.opacity = "0";
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll);
-});
+searchFunction();
 
 // Webshow section
 
 const webshowContainer = document.querySelector(".webshow-container");
+let FavourateMoviesArr = []; // Initialize as an empty array
 
 const webshow = async (movieName) => {
   const movieData = await Movies(movieName);
@@ -437,121 +405,75 @@ const webshow = async (movieName) => {
     favIcon.style.color = "transparent";
   });
 
-  const favouratewrapper = document.querySelector(".fav-container");
   favIcon.addEventListener("click", () => {
-    FavourateMovies.push({
+    const newFavoriteMovie = {
       title: movieData.Title,
       poster: movieData.Poster,
       plot: movieData.Plot,
       genre: movieData.Genre,
       imdb: movieData.imdbRating,
-    });
+    };
 
-    favouratewrapper.innerHTML = "";
-    FavourateMovies.forEach((movie) => {
-      const favMovies = document.createElement("div");
-      favMovies.classList.add("fav-films");
-      favMovies.innerHTML = `
-      <div class="favourateMovieContainer">
-            <div class="image-container">
-              <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
-            </div>
-            <div class="movieDetails">
-              <h4>${movie.title}</h4>
-              <p><span>Storyline:</span> ${movie.plot}</p>
-              <p><span>Movie Genre:&nbsp;</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings: </span> ${movie.imdb}</p>
-              <div class="watchtrash">
-              <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
-              <i class="fa-solid fa-trash-can trashcan"></i>
-              </div>
-              </div>
-          </div>
-          
-          `;
+    FavourateMoviesArr.push(newFavoriteMovie);
 
-      favouratewrapper.appendChild(favMovies);
-    });
+    // Save to localStorage
+    localStorage.setItem("favouriteMovies", JSON.stringify(FavourateMoviesArr));
 
-    // Assuming this code is inside the block where movies are rendered
-    const trashcans = document.querySelectorAll(".trashcan");
-
-    // Attach event listeners to all trashcan icons
-    trashcans.forEach((trashcan, index) => {
-      trashcan.addEventListener("click", () => {
-        // Remove the specific movie from the array using splice
-        FavourateMovies.splice(index, 1);
-
-        // Clear the container
-        const favouratewrapper = document.querySelector(".fav-container");
-        favouratewrapper.innerHTML = "";
-
-        // Re-render the updated list of favorite movies
-        FavourateMovies.forEach((movie) => {
-          const favMovies = document.createElement("div");
-          favMovies.classList.add("fav-films");
-          favMovies.innerHTML = `
-      <div class="favourateMovieContainer">
-            <div class="image-container">
-              <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
-            </div>
-            <div class="movieDetails">
-              <h4>${movie.title}</h4>
-              <p><span>Storyline:</span> ${movie.plot}</p>
-              <p><span>Movie Genre:</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings:</span> ${movie.imdb}</p>
-              <div class="watchtrash">
-                <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
-                <i class="fa-solid fa-trash-can trashcan"></i>
-              </div>
-            </div>
-          </div>`;
-          favouratewrapper.appendChild(favMovies);
-
-          // Re-attach the trashcan event listeners after re-rendering
-          const newTrashcans = document.querySelectorAll(".trashcan");
-          newTrashcans.forEach((newTrashcan, newIndex) => {
-            newTrashcan.addEventListener("click", () => {
-              FavourateMovies.splice(newIndex, 1);
-              newTrashcan.closest(".fav-films").remove(); // Remove the movie element from the DOM
-            });
-          });
-        });
-      });
-    });
+    renderFavoriteMovies();
   });
 };
+
+function renderFavoriteMovies() {
+  const favouratewrapper = document.querySelector(".fav-container");
+  favouratewrapper.innerHTML = "";
+
+  FavourateMoviesArr.forEach((movie, index) => {
+    const favMovies = document.createElement("div");
+    favMovies.classList.add("fav-films");
+    favMovies.innerHTML = `
+      <div class="favourateMovieContainer">
+        <div class="image-container">
+          <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
+        </div>
+        <div class="movieDetails">
+          <h4>${movie.title}</h4>
+          <p><span>Storyline:</span> ${movie.plot}</p>
+          <p><span>Movie Genre:</span> ${movie.genre} &nbsp; &nbsp; <span>IMDB Ratings:</span> ${movie.imdb}</p>
+          <div class="watchtrash">
+            <a href="https://www.imdb.com/" target="_blank"><button class="favCTABtn">Watch Now</button></a>
+            <i class="fa-solid fa-trash-can trashcan"></i>
+          </div>
+        </div>
+      </div>`;
+    favouratewrapper.appendChild(favMovies);
+
+    // Attach event listener to remove movie from favorites
+    const trashcan = favMovies.querySelector(".trashcan");
+    trashcan.addEventListener("click", () => {
+      // Remove the movie from the array
+      FavourateMoviesArr.splice(index, 1);
+
+      // Update localStorage
+      localStorage.setItem("favouriteMovies", JSON.stringify(FavourateMoviesArr));
+
+      // Re-render the favorite movies list
+      renderFavoriteMovies();
+    });
+  });
+}
+
+// Load favorite movies from localStorage on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const storedMovies = localStorage.getItem("favouriteMovies");
+
+  if (storedMovies) {
+    FavourateMoviesArr = JSON.parse(storedMovies);
+    renderFavoriteMovies();
+  }
+});
 
 const webshowDisplay = webshowArr.map((movie) => {
   return webshow(movie);
 });
 
-const body = document.body;
 
-
-const moviebg = async (moviename) => {
-  try {
-    const moviebgURL = await Movies(moviename);
-
-    if (moviebgURL && moviebgURL.Poster) {
-      body.style.backgroundImage = `url(${moviebgURL.Poster})`;
-      body.style.backgroundRepeat = "repeat-y";
-      body.style.backgroundSize = "contain";
-      body.style.backgroundPosition= "center"
-    } else {
-      console.warn('No valid poster URL found for', moviename);
-    }
-  } catch (error) {
-    console.error('Error fetching the movie background:', error);
-  }
-};
-
-// Function to select a random movie from the array
-const getRandomMovie = (moviesArray) => {
-  const randomIndex = Math.floor(Math.random() * moviesArray.length);
-  return moviesArray[randomIndex];
-};
-
-
-setInterval(() => {
-  const randomMovie = getRandomMovie(popularMovies);
-  moviebg(randomMovie); 
-}, 8000); 
