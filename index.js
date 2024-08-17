@@ -185,8 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const popularFilms = async (movieName) => {
   const movieData = await Movies(movieName);
   const movieContainer = document.createElement("div");
-  movieContainer.classList.add("movie");
-  movieContainer.classList.add("popularmoviesection");
+  movieContainer.classList.add("movie" ,"popularmoviesection");
   movieContainer.innerHTML = `
    <a href="https://www.imdb.com/" target="_blank">
       <img src="${movieData.Poster}" alt="${movieData.Title}" title="${movieData.Title}">
@@ -207,7 +206,7 @@ const popularFilms = async (movieName) => {
     favIcon.style.color = "transparent";
   });
 
-  movieContainer.addEventListener("click", () => {
+  favIcon.addEventListener("click", () => {
     const newFavoriteMovie = {
       title: movieData.Title,
       poster: movieData.Poster,
@@ -271,7 +270,7 @@ function renderFavoriteMovies() {
 }
 
 // This function can be used to populate the popular films
-popularMovies.map((movie) => {
+const popularMoviesSection = popularMovies.map((movie) => {
   return popularFilms(movie);
 });
 
@@ -345,46 +344,67 @@ const SearchBtn = document.getElementById("searchBtn");
 const searchFunction = () => {
   searchInputBar.addEventListener("input", async () => {
     const searchInput = searchInputBar.value;
-    const searchMovies = await Movies(searchInput);
+    await handleSearch(searchInput);
+  });
 
-    const searchedResults = document.createElement("div");
-    searchOutput.innerHTML = "";
+  // Trigger search when the search button is clicked
+  SearchBtn.addEventListener("click", async () => {
+    const searchInput = searchInputBar.value;
+    if (searchInput !== "") {
+      await handleSearch(searchInput);
+      
+      // Store the selected movie title in localStorage
+      const searchMovies = await Movies(searchInput);
+      localStorage.setItem("selectedMovie", searchMovies.Title);
+  
+      // Redirect to result.html
+      window.location.href = "./Results/result.html";
+    }
+  });
+  
 
-    if (searchInput != "") {
-      searchedResults.innerHTML = "";
-      searchedResults.classList.add("inputedsearchResults");
-      searchedResults.innerHTML = `
+// Handle the search process
+const handleSearch = async (searchInput) => {
+  const searchMovies = await Movies(searchInput);
+
+  const searchedResults = document.createElement("div");
+  searchOutput.innerHTML = "";
+
+  if (searchInput !== "") {
+    searchedResults.innerHTML = "";
+    searchedResults.classList.add("inputedsearchResults");
+    searchedResults.innerHTML = `
       <div class="searchImg">
-        <a href="Demo/result.html" class="movieLink" data-movie="${searchMovies.Title}">
+        <a href="./Results/result.html" class="movieLink" data-movie="${searchMovies.Title}">
           <img src="${searchMovies.Poster}" alt="${searchMovies.Title}">
         </a>
-        </div>
-        <div class="movie-Details">
-          <ul>
-            <li><a href="Demo/result.html" class="movieLink" data-movie="${searchMovies.Title}">Title: ${searchMovies.Title}</a></li>
-            <li>Genre: ${searchMovies.Genre}</li>
-            <li>Cast: ${searchMovies.Actors}</li>
-            <li>Year: ${searchMovies.Year}</li>
-          </ul>
+      </div>
+      <div class="movie-Details">
+        <ul>
+          <li><a href="./Results/result.html" class="movieLink" data-movie="${searchMovies.Title}">Title: ${searchMovies.Title}</a></li>
+          <li>Genre: ${searchMovies.Genre}</li>
+          <li>Cast: ${searchMovies.Actors}</li>
+          <li>Year: ${searchMovies.Year}</li>
+        </ul>
+      </div>
+    `;
 
-        </div>
-      `;
-
-      // Add click event listener to save the movie title
-      searchedResults.querySelectorAll(".movieLink").forEach((link) => {
-        link.addEventListener("click", (e) => {
-          const movieTitle = e.currentTarget.getAttribute("data-movie");
-          localStorage.setItem("selectedMovie", movieTitle); // Store the movie title
-        });
+    // Add click event listener to save the movie title
+    searchedResults.querySelectorAll(".movieLink").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const movieTitle = e.currentTarget.getAttribute("data-movie");
+        localStorage.setItem("selectedMovie", movieTitle); // Store the movie title
       });
-    } else {
-      console.log("Not found");
-    }
-    searchOutput.appendChild(searchedResults);
-  });
-};
+    });
+  } else {
+    console.log("Not found");
+  }
+  searchOutput.appendChild(searchedResults);
+}};
 
+// Call the search function
 searchFunction();
+
 
 // Webshow section
 
