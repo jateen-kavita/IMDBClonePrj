@@ -1,50 +1,113 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+CL:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+CL:wght@100..400&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.resultContainer{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+body {
+  background: linear-gradient(
+    to bottom,
+    rgb(68, 64, 64),
+    rgb(23, 22, 22)
+  ) !important;
 }
-.movieDetailsContainer{
-    height: 20rem;
-    width: 50rem;
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    background-color: brown;
-    border-radius: 10px;
+
+.resultContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.img-container{
-    margin-left: 2rem;
+
+.movieDetailsContainer {
+  height: 40rem;
+  width: 80rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  /* background-color: brown; */
+  border-radius: 10px;
+  background: rgba(164, 164, 164, 0.31);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 10);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 3px solid rgba(164, 164, 164, 0.5);
 }
-.img-container img{
-    height: 15rem;
-    width: 10rem;
-    border-radius: 10px;
+
+.img-container {
+  margin-left: 2rem;
 }
-.movie-Details{
-    color: antiquewhite;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-right: 3rem;
-    letter-spacing: 1px;
+
+.img-container img {
+  height: 35rem;
+  width: 25rem;
+  border-radius: 10px;
 }
-button{
-    border: none;
-    border-radius: 20px;
-    padding: 1rem 4rem;
-    background-color: blue;
-    cursor: pointer;
-    color: white;
+
+.movie-Details {
+  color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-right: 3rem;
+  letter-spacing: 1px;
 }
-button a{
-    font-size: 1rem;
-    text-decoration: none;
+
+.movie-Details h2 {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 5rem;
+  letter-spacing: 1px;
+  transition: all 0.5s;
+}
+
+.movie-Details p {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  transition: all 0.5s;
+}
+
+.btn {
+  display: flex;
+  gap: 2rem;
+}
+
+#goback {
+  background-color: rgb(56, 56, 43);
+}
+
+span{
+    color:burlywood;
+}
+button {
+  height: 3.5rem;
+  border: none;
+  border-radius: 20px;
+  padding: 1rem 4rem;
+  background-color: blue;
+  cursor: pointer;
+  color: white;
+  transition: all 1s;
+  margin-right: 2px;
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: all 0.5s;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+  &:hover {
+    border: 2px solid rgba(164, 164, 164, 0.5);
+    transform: scale(1.1);
+  }
 }

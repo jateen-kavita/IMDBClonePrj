@@ -22,14 +22,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       movieContainer.classList.add("movieDetailsContainer");
       movieContainer.innerHTML = `
         <div class="img-container">
-          <img src="${movieAPI.Poster}" alt="${movieAPI.Title}" />
+          <img src="${movieAPI.Poster}" alt="${movieAPI.Title}" title="${movieAPI.Title}" />
         </div>
         <div class="movie-Details">
-          <h2>${movieAPI.Title}</h2>
-          <p>${movieAPI.Plot}</p>
-          <p>${movieAPI.Genre}</p>
-          <p>${movieAPI.Year}</p>
-          <a href="../Index.html"><button>Go Back</button></a>
+          <h2><span>Title: </span>${movieAPI.Title}</h2>
+          <p><span>Plot: </span>${movieAPI.Plot}</p>
+          <p><span>Genre:</span> ${movieAPI.Genre}</p>
+          <p><span>Release:</span> ${movieAPI.Year}</p>
+          <div class="btn">
+           <a href="https://www.imdb.com/" target="_blank"><button>Watch Now</button></a>
+          <a href="../Index.html"><button id="goback">Go Back</button></a>
+          </div>
+         
         </div>
       `;
 

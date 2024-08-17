@@ -11,73 +11,94 @@ const Movies = async (movieName) => {
 
 // Search Funtion
 
-// Search Function
 const searchInputBar = document.querySelector(".searchBox");
 const searchOutput = document.querySelector(".searchResults");
 const SearchBtn = document.getElementById("searchBtn");
 
-// Handle the search process
-const handleSearch = async (searchInput) => {
-  const searchMovies = await Movies(searchInput);
-  console.log("searchMovies:", searchMovies); // Log search results
-
-  const searchedResults = document.createElement("div");
-  searchOutput.innerHTML = "";
-
-  if (searchMovies.Response === "True") {
-    searchedResults.classList.add("inputedsearchResults");
-    searchedResults.innerHTML = `
-      <div class="searchImg">
-        <a href="./Results/result.html" class="movieLink" data-movie="${searchMovies.Title}">
-          <img src="${searchMovies.Poster}" alt="${searchMovies.Title}">
-        </a>
-      </div>
-      <div class="movie-Details">
-        <ul>
-          <li><a href="./Results/result.html" class="movieLink" data-movie="${searchMovies.Title}">Title: ${searchMovies.Title}</a></li>
-          <li>Genre: ${searchMovies.Genre}</li>
-          <li>Cast: ${searchMovies.Actors}</li>
-          <li>Year: ${searchMovies.Year}</li>
-        </ul>
-        <button class="addToFavBtn">Add to Favorites</button>
-      </div>
-    `;
-    searchOutput.appendChild(searchedResults);
-
-    // Add event listener for "Add to Favorites"
-    const addToFavBtn = searchedResults.querySelector(".addToFavBtn");
-    if (addToFavBtn) {
-      addToFavBtn.addEventListener("click", () => {
-        const newFavoriteMovie = {
-          title: searchMovies.Title,
-          poster: searchMovies.Poster,
-          plot: searchMovies.Plot,
-          genre: searchMovies.Genre,
-          imdb: searchMovies.imdbRating,
-        };
-        addMovieToFavorites(newFavoriteMovie);
-      });
-    }
-  } else {
-    searchedResults.innerHTML = `<p>No results found</p>`;
-    searchOutput.appendChild(searchedResults);
-  }
-};
-
-// Function to handle the search input and button
+// Search Function
 const searchFunction = () => {
   searchInputBar.addEventListener("input", async () => {
     const searchInput = searchInputBar.value;
     await handleSearch(searchInput);
   });
 
+  // Trigger search when the search button is clicked
   SearchBtn.addEventListener("click", async () => {
     const searchInput = searchInputBar.value;
     if (searchInput !== "") {
       await handleSearch(searchInput);
+
+      // Store the selected movie title in localStorage
+      const searchMovies = await Movies(searchInput);
+      localStorage.setItem("selectedMovie", searchMovies.Title);
+
+      // Redirect to result.html
+      window.location.href = "./Results/result.html";
     }
   });
-};
+
+  // Handle the search process
+  const handleSearch = async (searchInput) => {
+    const searchMovies = await Movies(searchInput);
+  
+    const searchedResults = document.createElement("div");
+    searchOutput.innerHTML = "";
+  
+    if (searchInput !== "") {
+      searchedResults.innerHTML = "";
+      searchedResults.classList.add("inputedsearchResults" ,"glassmorphism-effect");
+      searchedResults.innerHTML = `
+        <div class="searchImg">
+          <a href="./Results/result.html" class="movieLink" data-movie="${searchMovies.Title}">
+            <img src="${searchMovies.Poster}" alt="${searchMovies.Title}" title="${searchMovies.Title}">
+          </a>
+        </div>
+        <div class="movie-Details">
+          <ul>
+            <li><a href="./Results/result.html" class="movieLink" data-movie="${searchMovies.Title}">
+            <span>Title:</span> ${searchMovies.Title}</a></li>
+            <li><span>Genre:</span> ${searchMovies.Genre}</li>
+            <li><span>Cast:</span> ${searchMovies.Actors}</li>
+            <li><span>Year:</span> ${searchMovies.Year}</li>
+          </ul>
+          <button class="addToFavBtn">Add to Favorites</button>
+        </div>
+      `;
+  
+      // Add click event listener to save the movie title
+      searchedResults.querySelectorAll(".movieLink").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const movieTitle = e.currentTarget.getAttribute("data-movie");
+          localStorage.setItem("selectedMovie", movieTitle); // Store the movie title
+        });
+      });
+  
+      // Add event listener to the "Add to Favorites" button
+      const addToFavBtn = searchedResults.querySelector(".addToFavBtn");
+      addToFavBtn.addEventListener("click", () => {
+        const isAlreadyFavorite = FavourateMovies.some(
+          (movie) => movie.title === searchMovies.Title
+        );
+  
+        if (isAlreadyFavorite) {
+          alert("This movie is already in your favorites!");
+        } else {
+          const newFavoriteMovie = {
+            title: searchMovies.Title,
+            poster: searchMovies.Poster,
+            plot: searchMovies.Plot,
+            genre: searchMovies.Genre,
+            imdb: searchMovies.imdbRating,
+          };
+          addMovieToFavorites(newFavoriteMovie);
+        }
+      });
+    } else {
+      console.log("Not found");
+    }
+    searchOutput.appendChild(searchedResults);
+  };
+};  
 
 // Call the search function
 searchFunction();
@@ -229,7 +250,7 @@ function renderFavoriteMovies() {
     const favMovies = document.createElement("div");
     favMovies.classList.add("fav-films");
     favMovies.innerHTML = `
-      <div class="favourateMovieContainer">
+      <div class="favourateMovieContainer glassmorphism-effect">
         <div class="image-container">
           <img src="${movie.poster}" alt="${movie.title}" title="${movie.title}" />
         </div>
@@ -340,3 +361,33 @@ webshowArr.forEach((show) => webshow(show));
 
 // const popularMovies = ["The Dark Knight", "Interstellar"]; // Replace with actual movie names
 popularMovies.forEach((movie) => popularFilms(movie));
+
+
+// Function to scroll to the top of the page
+
+
+// Get the "Back to Top" button element
+const backToTopBtn = document.querySelector('.backtotopbtn');
+
+// Show or hide the button depending on the scroll position
+function handleScroll() {
+    if (window.scrollY > 400) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+
+    }
+}
+
+// Scroll smoothly to the top when the button is clicked
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+// Attach event listeners
+window.addEventListener('scroll', handleScroll);
+backToTopBtn.addEventListener('click', scrollToTop);
+
