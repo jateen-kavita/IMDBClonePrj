@@ -49,13 +49,13 @@ const searchFunction = () => {
       searchedResults.classList.add("inputedsearchResults" ,"glassmorphism-effect");
       searchedResults.innerHTML = `
         <div class="searchImg">
-          <a href="./Results/result.html" class="movieLink" data-movie="${searchMovies.Title}">
+          <a href="./results/result.html" class="movieLink" data-movie="${searchMovies.Title}">
             <img src="${searchMovies.Poster}" alt="${searchMovies.Title}" title="${searchMovies.Title}">
           </a>
         </div>
         <div class="movie-Details">
           <ul>
-            <li><a href="./Results/result.html" class="movieLink" data-movie="${searchMovies.Title}">
+            <li><a href="./results/result.html" class="movieLink" data-movie="${searchMovies.Title}">
             <span>Title:</span> ${searchMovies.Title}</a></li>
             <li><span>Genre:</span> ${searchMovies.Genre}</li>
             <li><span>Cast:</span> ${searchMovies.Actors}</li>
