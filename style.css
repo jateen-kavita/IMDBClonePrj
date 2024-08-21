@@ -704,3 +704,282 @@ a {
 .toptext a:hover {
   text-decoration: none;
 }
+
+/* Mobile devices (up to 600px) */
+@media only screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: row;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .leftSideLogo {
+    text-align: center;
+    margin-left: 8rem;
+    margin-top: 0.5rem;
+    font-size: 0.5rem;
+  }
+
+  .navLinks {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .searchBar {
+    flex-direction: row;
+    margin: 1rem 2rem;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .searchBar .inputSearch input {
+    width: 100%;
+  }
+
+  .carousel-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 1rem 1rem;
+  }
+  .img-container {
+    z-index: -999;
+    width: 100%;
+    height: 100%;
+    filter: blur(3px);
+  }
+  .img-container img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .carousel-data {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .movie-elements {
+    margin: 1rem 1.5rem;
+    font-size: 0.8rem;
+    width: 90%;
+    gap: 1rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 2rem;
+    border-radius: 25px;
+  }
+
+  .movie-elements h1 {
+    font-size: 2rem;
+    line-height: 40px;
+  }
+
+  .movie-elements p {
+    font-size: 0.6rem;
+    line-height: 20px;
+  }
+
+  .cta-btn {
+    width: 50%;
+    height: 100%;
+    padding: 0.5rem;
+    font-size: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .movie-section {
+    align-items: center;
+    height: 100%;
+    width: 85%;
+    overflow-x: hidden;
+    margin: 1rem auto;
+  }
+
+  .movie-container {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .text {
+    text-align: center;
+  }
+  .movie {
+    height: 100%;
+    width: 60%;
+    margin: 0rem 0rem;
+  }
+
+  .logos {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-container {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    height: 80%;
+  }
+
+  .favourate-wrapper {
+    margin: 1rem;
+  }
+
+  .favourateMovieContainer {
+    flex-direction: column;
+    height: auto;
+    margin: 1rem 1rem;
+  }
+
+  .image-container {
+    margin-top: 1rem;
+    width: 80%;
+    height: 50%;
+  }
+
+  .movieDetails {
+    width: 85%;
+    font-size: 0.8rem;
+    line-height: 15px;
+    margin-left: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .watchtrash {
+    justify-content: center;
+  }
+
+  .backtotopbtn {
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+/* Tablets (600px to 900px) */
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+  .navbar {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .leftSideLogo {
+    margin-left: 2rem;
+    font-size: 1rem;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .searchBar {
+    margin-right: 2rem;
+    gap: 0.5rem;
+  }
+
+  .searchBar .inputSearch input {
+    width: 100%;
+  }
+
+  .carousel-wrapper {
+    height: auto;
+    margin: 2rem 2rem;
+  }
+  .carousel-data {
+    display: flex;
+    gap: 6rem;
+  }
+
+  .carousel-data {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .movie-elements {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 25rem;
+  }
+  .img-container {
+    width: 50%;
+    margin-right: 0.3rem;
+    border-radius: 20px;
+  }
+
+  .movie-elements > h1 {
+    font-size: 2rem;
+  }
+
+  .movie-elements p {
+    font-size: 1rem;
+  }
+
+  .cta-btn {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .movie-section {
+    height: auto;
+  }
+  .most-popular-container.movie-container {
+    width: 300%;
+    gap: 1rem;
+  }
+  .movie-container {
+    gap: 1rem;
+    width: 150%;
+  }
+
+  .movie {
+    width: 100%;
+    margin: auto;
+  }
+
+  .logos {
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .favourate-wrapper {
+    margin: 1rem;
+  }
+
+  .favourateMovieContainer {
+    flex-direction: column;
+    height: auto;
+    margin: 1rem 1rem;
+  }
+
+  .image-container {
+    margin-top: 1rem;
+    width: 35%;
+    height: 20%;
+    object-fit: fill;
+  }
+
+  .movieDetails {
+    width: 80%;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .watchtrash {
+    justify-content: center;
+  }
+
+  .backtotopbtn {
+    bottom: 15px;
+    right: 15px;
+  }
+}
