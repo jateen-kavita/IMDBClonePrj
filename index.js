@@ -207,7 +207,7 @@ const showPreviousMovie = () => {
 carouselMovieShow(carouselArr[currentMovieIndex]);
 
 // Automatically change the movie every 10 seconds
-const carouselInterval = setInterval(showNextMovie, 8000);
+const carouselInterval = setInterval(showNextMovie, 10000);
 
 
 
@@ -357,7 +357,7 @@ async function popularFilms(movieName) {
 movieArr.forEach((movie) => film(movie));
 
 // const webshowArr = ["Breaking Bad", "Game of Thrones"]; // Replace with actual show names
-webshowArr.forEach((show) => webshow(show));
+webshowArr.forEach((movie) => webshow(movie));
 
 // const popularMovies = ["The Dark Knight", "Interstellar"]; // Replace with actual movie names
 popularMovies.forEach((movie) => popularFilms(movie));
