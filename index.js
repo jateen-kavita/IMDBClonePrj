@@ -1,7 +1,7 @@
 const APIKey = "1e318c13";
 // Main Function Getting API & Making is usable
 const Movies = async (movieName) => {
-  const APIURL = ` http://www.omdbapi.com/?i=tt3896198&apikey=${APIKey}&t=${movieName}`;
+  const APIURL = ` https://www.omdbapi.com/?i=tt3896198&apikey=${APIKey}&t=${movieName}`;
   const fetchingAPI = await fetch(APIURL);
   const MovieAPI = await fetchingAPI.json();
   return MovieAPI;
