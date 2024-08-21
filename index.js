@@ -33,7 +33,7 @@ const searchFunction = () => {
       localStorage.setItem("selectedMovie", searchMovies.Title);
 
       // Redirect to result.html
-      window.location.href = "./Results/result.html";
+      window.location.href = "./results/result.html";
     }
   });
 
