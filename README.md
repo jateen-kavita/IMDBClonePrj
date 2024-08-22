@@ -1,5 +1,5 @@
 IMDb Clone
-An IMDb clone website built using modern web technologies. The website allows users to search for movies, view detailed information, and add them to their favorites. The data is fetched from the OMDB API, which provides detailed information about movies.
+An IMDb clone website built using modern web technologies. The website allows users to search for movies, view detailed information, and add them to their favorites. The data is fetched from the OMDB API, which provides detailed movie information.
 
 Features
 Search Movies: Search for movies by title.
@@ -13,7 +13,6 @@ Frontend:
 HTML5
 CSS3 (with Glassmorphism)
 JavaScript (ES6+)
-Backend:
 
 API:
 OMDB API - Used to fetch movie data.
